@@ -1,0 +1,28 @@
+[build]
+  # Build command for your React app
+  command = "npm run build"
+  # Directory where the build output is located
+  publish = "dist"
+
+[functions]
+  # Directory where your Netlify Functions are located
+  directory = "netlify/functions"
+
+# Environment variables (these will be set in Netlify dashboard)
+# [build.environment]
+#   NODE_VERSION = "18"
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Redirect rules (optional)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
